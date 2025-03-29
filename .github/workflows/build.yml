@@ -37,12 +37,12 @@ jobs:
       - name: OpenAPIスキーマを生成
         run: |
           mkdir -p output
-          tsp compile . --emit @typespec/openapi3 --output-dir tspec-output/schema
+          tsp compile . --emit @typespec/openapi3 --output-dir tsp-output/schema
 
       - name: GitHub Pages用に公開ファイルを準備
         run: |
           mkdir -p public
-          cp tspec-output/schema/openapi.yaml public/
+          cp tsp-output/schema/openapi.yaml public/
           echo "<meta http-equiv=\"refresh\" content=\"0; url=openapi.yaml\">" > public/index.html
 
       - name: GitHub Pagesへデプロイ
