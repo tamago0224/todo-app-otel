@@ -30,11 +30,12 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-cache
+            ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
+            ${{ runner.os }}-npm-cache-
       
-      - name: 依存関係をインストール（キャッシュがない場合のみ）
-        if: steps.cache-npm.outputs.cache-hit != 'true'
-        run: npm install
+      #- name: 依存関係をインストール（キャッシュがない場合のみ）
+      #  if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      #  run: npm install
 
       - name: TypeSpec CLIをインストール
         run: npm install -g @typespec/compiler
