@@ -25,11 +25,16 @@ jobs:
 
       - name: npmキャッシュの復元
         uses: actions/cache@v4
+        id: cache-npm
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-cache
+      
+      - name: 依存関係をインストール（キャッシュがない場合のみ）
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm install
 
       - name: TypeSpec CLIをインストール
         run: npm install -g @typespec/compiler
