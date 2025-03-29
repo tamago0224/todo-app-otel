@@ -42,7 +42,7 @@ jobs:
       - name: OpenAPIスキーマを生成
         run: |
           mkdir -p output
-          tsp compile . --emit @typespec/openapi3 --output-dir tsp-output/schema
+          tsp compile . --emit @typespec/openapi3 --output-dir tsp-output
 
       - name: GitHub Pages用に公開ファイルを準備
         run: |
