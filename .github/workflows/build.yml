@@ -38,17 +38,18 @@ jobs:
 
       - name: TypeSpec CLIをインストール
         run: npm install -g @typespec/compiler
+      
+      - name: Redocly CLIをインストール
+        run: npm install -g @redocly/cli
 
       - name: OpenAPIスキーマを生成
         run: |
           mkdir -p output
           tsp compile . --emit @typespec/openapi3 --output-dir tsp-output
-
-      - name: GitHub Pages用に公開ファイルを準備
+      
+      - name: Redocly CLI を使用して Web ページを生成
         run: |
-          mkdir -p public
-          cp tsp-output/schema/openapi.yaml public/
-          echo "<meta http-equiv=\"refresh\" content=\"0; url=openapi.yaml\">" > public/index.html
+          npx @redocly/cli@latest build-docs tsp-output/schema/openapi.yaml --output public/index.html
 
       - name: GitHub Pagesへデプロイ
         uses: actions/upload-pages-artifact@v3
