@@ -1,4 +1,4 @@
-CREATE TABLE todos (
+CREATE TABLE IF NOT EXISTS todos (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
